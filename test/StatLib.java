@@ -4,17 +4,26 @@ public class StatLib {
 
 	// simple average
 	public static float avg(float[] x) {
-		return 0;
+		int counter = 0;
+		float sum = 0;
+		for (float f : x) {
+			sum = sum + f;
+			counter++;
+		}
+		return sum / counter;
 	}
 
 	// returns the variance of X and Y
 	public static float var(float[] x) {
-		return 0;
+		float[] xSquared = new float[x.length];
+		for (int i = 0; i < xSquared.length; i++) {
+			xSquared[i] = x[i] * x[i];
+		}
+		return StatLib.avg(xSquared) - (StatLib.avg(x) * StatLib.avg(x));
 	}
 
 	// returns the covariance of X and Y
 	public static float cov(float[] x, float[] y) {
-
 		return 0;
 	}
 

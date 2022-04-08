@@ -18,7 +18,8 @@ public class MainTrain {
 		Line l = StatLib.linear_reg(ps);
 		Point p = new Point(4, 8);
 
-		float v[] = { StatLib.var(x), StatLib.cov(x, y), StatLib.pearson(x, y), l.a, l.b, l.f(4), StatLib.dev(p, l) };
+		float v[] = { StatLib.var(x), StatLib.cov(x, y), StatLib.pearson(x, y), l.a,
+				l.b, l.f(4), StatLib.dev(p, l) };
 		float e[] = { 8.25f, 16.63f, 0.999f, 2.015f, 0.113f, 8.176f, 0.176f };
 
 		for (int i = 0; i < 7; i++)
