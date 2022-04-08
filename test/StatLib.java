@@ -35,7 +35,7 @@ public class StatLib {
 
 	// returns the Pearson correlation coefficient of X and Y
 	public static float pearson(float[] x, float[] y) {
-		return cov(x, y) / (float) (Math.sqrt(var(x)) * Math.sqrt(var(x)));
+		return (float) (cov(x, y) / (Math.sqrt(var(x)) * Math.sqrt(var(y))));
 	}
 
 	// performs a linear regression and returns the line equation
