@@ -19,32 +19,57 @@ public class StatLib {
 		for (int i = 0; i < xSquared.length; i++) {
 			xSquared[i] = x[i] * x[i];
 		}
-		return StatLib.avg(xSquared) - (StatLib.avg(x) * StatLib.avg(x));
+		return avg(xSquared) - (avg(x) * avg(x));
 	}
 
 	// returns the covariance of X and Y
 	public static float cov(float[] x, float[] y) {
-		return 0;
+		if (x.length != y.length)
+			return 0;
+		float[] XYArr = new float[x.length];
+		for (int i = 0; i < XYArr.length; i++) {
+			XYArr[i] = x[i] * y[i];
+		}
+		return avg(XYArr) - (avg(x) * avg(y));
 	}
 
 	// returns the Pearson correlation coefficient of X and Y
 	public static float pearson(float[] x, float[] y) {
-		return 0;
+		return cov(x, y) / (float) (Math.sqrt(var(x)) * Math.sqrt(var(x)));
 	}
 
 	// performs a linear regression and returns the line equation
 	public static Line linear_reg(Point[] points) {
-		return null;
+		float a, b, avgX = 0, avgY = 0;
+		float[] x = new float[points.length];
+		float[] y = new float[points.length];
+		for (int i = 0; i < points.length; i++) {
+			// populating float[] x and float[] y
+			x[i] = points[i].x;
+			y[i] = points[i].y;
+			// summing the x's and y's to calculate averages
+			avgX = avgX + points[i].x;
+			avgY = avgY + points[i].y;
+		}
+		avgX = avgX / points.length;
+		avgY = avgY / points.length;
+		a = cov(x, y) / var(x);
+		b = avgY - (a * avgX);
+		return new Line(a, b);
 	}
 
 	// returns the deviation between point p and the line equation of the points
 	public static float dev(Point p, Point[] points) {
-		return 0;
+		return dev(p, linear_reg(points));
 	}
 
 	// returns the deviation between point p and the line
 	public static float dev(Point p, Line l) {
-		return 0;
+		float result;
+		result = p.y - (l.a * p.x + l.b);
+		if (result < 0)
+			return -1 * result;
+		return result;
 	}
 
 }
